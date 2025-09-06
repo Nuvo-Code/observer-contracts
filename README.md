@@ -25,8 +25,15 @@ Her event ortak bir **envelope** içinde taşınır:
   "event_id": "018fb94e-9c86-7c2a-bf5f-3a7f6b8d9a21",
   "occurred_at": "2025-09-06T08:00:00Z",
   "version": 1,
-  "type": "project.created",
-  "data": { ... }
+  "producer": "observer-api",
+  "schema": "project.created@v1",
+  "partition_key": 123,
+  "payload": {
+    "id": 123,
+    "name": "Acme",
+    "domain": "acme.com",
+    "endpoints": ["https://acme.com/health"]
+  }
 }
 ```
 
