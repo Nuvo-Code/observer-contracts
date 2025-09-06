@@ -1,0 +1,23 @@
+{
+  "$id": "https://nuvo-code.github.io/observer-contracts/schemas/json/project/events/project.created.v1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "project.created@v1",
+  "type": "object",
+  "allOf": [
+    { "$ref": "https://nuvo-code.github.io/observer-contracts/schemas/json/envelope.v1.json" }
+  ],
+  "properties": {
+    "schema": { "const": "project.created@v1" },
+    "partition_key": { "type": ["integer", "string"] },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "project": {
+          "$ref": "https://nuvo-code.github.io/observer-contracts/schemas/json/project/project-common.v1.json"
+        }
+      },
+      "required": ["project"]
+    }
+  }
+}

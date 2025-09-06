@@ -1,0 +1,46 @@
+{
+  "$id": "https://nuvo-code.github.io/observer-contracts/schemas/json/envelope.v1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MessageEnvelope v1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "event_id": {
+      "description": "Idempotency anahtarı. UUID (v4/v7 kabul).",
+      "type": "string",
+      "format": "uuid"
+    },
+    "occurred_at": {
+      "description": "ISO-8601 UTC zaman damgası.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "version": {
+      "description": "Mesaj sürümü (bu şema için 1).",
+      "type": "integer",
+      "const": 1
+    },
+    "producer": {
+      "description": "Üreten servis/uygulama adı (örn: observer-api).",
+      "type": "string",
+      "minLength": 1
+    },
+    "schema": {
+      "description": "Olay adı@sürüm. Örn: project.created@v1",
+      "type": "string",
+      "pattern": "^[a-z0-9_.-]+\\.(created|updated|deleted)@v1$"
+    },
+    "partition_key": {
+      "description": "Sharding/partition anahtarı (örn: project.id).",
+      "oneOf": [
+        { "type": "integer" },
+        { "type": "string" }
+      ]
+    },
+    "payload": {
+      "description": "Olay verisi (event tipine göre değişir).",
+      "type": "object"
+    }
+  },
+  "required": ["event_id", "occurred_at", "version", "producer", "schema", "payload"]
+}

@@ -1,0 +1,32 @@
+{
+  "$id": "https://nuvo-code.github.io/observer-contracts/schemas/json/project/events/project.deleted.v1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "project.deleted@v1",
+  "type": "object",
+  "allOf": [
+    { "$ref": "https://nuvo-code.github.io/observer-contracts/schemas/json/envelope.v1.json" }
+  ],
+  "properties": {
+    "schema": { "const": "project.deleted@v1" },
+    "partition_key": { "type": ["integer", "string"] },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "project": {
+          "description": "Silinen kayda dair minimal bilgi (id zorunlu).",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": { "type": "integer", "minimum": 1 },
+            "domain": { "type": ["string", "null"] },
+            "name": { "type": ["string", "null"] },
+            "deleted_at": { "type": ["string", "null"], "format": "date-time" }
+          },
+          "required": ["id"]
+        }
+      },
+      "required": ["project"]
+    }
+  }
+}
