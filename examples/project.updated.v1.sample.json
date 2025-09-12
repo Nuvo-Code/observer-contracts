@@ -1,23 +1,29 @@
 {
-  "event_id": "1e0a7c21-5f9f-4b72-9f2c-3dc1a1f1a9a1",
-  "occurred_at": "2025-09-06T10:15:00Z",
-  "version": 1,
-  "producer": "observer-api",
-  "schema": "project.updated@v1",
-  "partition_key": 123,
-  "payload": {
-    "project": {
-      "id": 123,
-      "name": "Acme Inc",
-      "domain": "acme.io",
-      "endpoints": ["https://acme.io/health"],
-      "is_active": true,
-      "verification_status": "verified",
-      "verification_method": "dns",
-      "created_at": "2025-09-06T07:59:54Z",
-      "updated_at": "2025-09-06T10:14:58Z",
-      "verified_at": "2025-09-06T09:00:00Z"
-    },
-    "changed_fields": ["domain", "endpoints", "verification_status", "verification_method", "verified_at", "updated_at"]
+  "$id": "https://nuvo-code.github.io/observer-contracts/schemas/json/project/events/project.updated.v1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "project.updated@v1",
+  "type": "object",
+  "allOf": [
+    { "$ref": "https://nuvo-code.github.io/observer-contracts/schemas/json/envelope.v1.json" }
+  ],
+  "properties": {
+    "schema": { "const": "project.updated@v1" },
+    "partition_key": { "type": ["integer", "string"] },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "project": {
+          "$ref": "https://nuvo-code.github.io/observer-contracts/schemas/json/project/project-common.v1.json"
+        },
+        "changed_fields": {
+          "description": "Değişen alan adları",
+          "type": "array",
+          "items": { "type": "string" },
+          "uniqueItems": true
+        }
+      },
+      "required": ["project"]
+    }
   }
 }

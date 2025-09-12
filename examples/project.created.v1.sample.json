@@ -1,22 +1,23 @@
 {
-  "event_id": "b7c2c0a0-9c8f-4b0b-9c1f-0a9a4e6f3a77",
-  "occurred_at": "2025-09-06T08:00:00Z",
-  "version": 1,
-  "producer": "observer-api",
-  "schema": "project.created@v1",
-  "partition_key": 123,
-  "payload": {
-    "project": {
-      "id": 123,
-      "name": "Acme Inc",
-      "domain": "acme.com",
-      "endpoints": ["https://acme.com/health"],
-      "is_active": true,
-      "verification_status": "pending",
-      "verification_method": null,
-      "created_at": "2025-09-06T07:59:54Z",
-      "updated_at": "2025-09-06T07:59:54Z",
-      "verified_at": null
+  "$id": "https://nuvo-code.github.io/observer-contracts/schemas/json/project/events/project.created.v1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "project.created@v1",
+  "type": "object",
+  "allOf": [
+    { "$ref": "https://nuvo-code.github.io/observer-contracts/schemas/json/envelope.v1.json" }
+  ],
+  "properties": {
+    "schema": { "const": "project.created@v1" },
+    "partition_key": { "type": ["integer", "string"] },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "project": {
+          "$ref": "https://nuvo-code.github.io/observer-contracts/schemas/json/project/project-common.v1.json"
+        }
+      },
+      "required": ["project"]
     }
   }
 }
